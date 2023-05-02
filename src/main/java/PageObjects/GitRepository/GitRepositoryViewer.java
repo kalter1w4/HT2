@@ -15,12 +15,13 @@ public class GitRepositoryViewer extends BasePage{
     private By repositorySearchField = By.xpath("//*[@id=\"repos-file-tree\"]/div[2]/span/input");
     private By goToFile = By.xpath("//*[@id=\"file-result-0\"]/div/div[2]");
     private  By BranchSwitherButton = By.xpath("//*[@id=\"branch-select-menu\"]/summary");
-    private By rawButton = By.xpath("//*[@id=\"repos-sticky-header\"]/div/div[1]/div[2]/div[2]/div[1]/div[1]/a/span/span");
+    private By rawButton = By.xpath("//*[@id=\"raw-url\"]");
     private By repositoryFolder = By.xpath("//*[@id=\"repo-content-pjax-container\"]/div/div/div[2]/div[1]/div[3]/div[3]/div[1]/div[2]/div[2]/span/a");
     public void GoToRepositoryFolder()
     {
         driver.findElement(repositoryFolder).click();
     }
+    private final By pomXmlFile = By.xpath("//*[@id=\"repo-content-pjax-container\"]/div/div/div[2]/div[1]/div[3]/div[3]/div[1]/div[4]/div[2]/span/a");
     public void EnterSearchField(String query)
     {
         waitElementIsVisible(driver.findElement(repositorySearchField)).sendKeys(query);
@@ -38,5 +39,9 @@ public class GitRepositoryViewer extends BasePage{
     {
         waitElementIsVisible(driver.findElement(BranchSwitherButton)).click();
         waitElementIsVisible(driver.findElement(By.xpath("//*[text()='"+text+"']"))).click();
+    }
+    public void GetPomXml()
+    {
+        driver.findElement(pomXmlFile).click();
     }
 }

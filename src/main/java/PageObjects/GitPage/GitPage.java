@@ -14,7 +14,7 @@ public class GitPage extends BasePage {
         super(driver);
     }
     private final By searchField = By.xpath("//*[@id=\"dashboard-repos-filter-left\"]");
-    private final By FirstRepositoryItem = By.xpath("/html/body/div[1]/div[6]/div/aside/div/loading-context/div/div[1]/div/ul[1]/li[3]/div/div/a");
+    private final By FirstRepositoryItem = By.xpath("/html/body/div[1]/div[6]/div/aside/div/loading-context/div/div[1]/div/ul/li/div/div/a");
     public GitPage EnterSearchQuery(String query)
     {
         driver.findElement(searchField).sendKeys(query);
@@ -24,7 +24,5 @@ public class GitPage extends BasePage {
     {
         waitElementIsVisible(driver.findElement(FirstRepositoryItem)).click();
     }
-
-
 
 }

@@ -29,10 +29,7 @@ public class AuthorizationTest extends BaseTest {
                 .EnterSearchQuery(query)
                 .GoToSearchedElement();
         gitRepositoryViewer
-                .GoToRepositoryFolder();
-        gitRepositoryViewer.SwitchBrachTo("master");
-        gitRepositoryViewer
-                .EnterSearchField("pom.xml");
+                .GetPomXml();
     }
     @Test(dependsOnMethods = {"SearchRepositoryByName"})
     @Parameters({"TestNgVersion"})
@@ -42,6 +39,11 @@ public class AuthorizationTest extends BaseTest {
         String xmlString = gitRepositoryViewer.GetRawedText();
         Project xmlObject = xmlDeserializer.PomXmlDeserialize(xmlString);
         List<Dependency> dependenciesList = xmlObject.getDependencies();
+
+        for (Dependency dependency : dependenciesList) {
+            System.out.println("Artifact ID: " + dependency.getArtifactId());
+            System.out.println("Version: " + dependency.getVersion());
+        }
 
         Dependency searchedDependency = new Dependency();
         Optional<Dependency> testngDependency = dependenciesList.stream()
